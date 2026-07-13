@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic AI Research &amp; Learning Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="app-header">
+  <div class="header-left">
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="header-titles">
+      <h1>Agentic AI Research &amp; Learning Portal</h1>
+      <p class="subtitle">Structured Learning &nbsp;•&nbsp; Practical Projects &nbsp;•&nbsp; Research Documentation &nbsp;•&nbsp; Daily Progress</p>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="search-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input type="text" id="globalSearch" placeholder="Search topics, submissions, notes…">
+    </div>
+    <div class="header-status">
+      <span class="status-dot"></span>
+      <span class="mono">SYSTEM ACTIVE</span>
+    </div>
+  </div>
+</header>
+
+<div class="app-shell">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-mark">AI</div>
+      <div class="brand-text">
+        <span class="brand-name">Research Portal</span>
+        <span class="brand-tag mono">v1.0</span>
+      </div>
+    </div>
+
+    <nav class="side-nav">
+      <button class="nav-item active" data-target="dashboard">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="9" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="3" width="7" height="5" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="12" width="7" height="9" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="3" y="16" width="7" height="5" rx="1.5" stroke="currentColor" stroke-width="1.8"/></svg>
+        <span>Dashboard</span>
+      </button>
+      <button class="nav-item" data-target="syllabus">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5v-15Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M4 18.5V20.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>Syllabus</span>
+      </button>
+      <button class="nav-item" data-target="submissions">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M7 9l5-6 5 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>Submissions</span>
+      </button>
+      <button class="nav-item" data-target="notes">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M6 4h9l5 5v11a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M15 4v5h5" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 13h8M8 16.5h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>Research Notes</span>
+      </button>
+      <button class="nav-item" data-target="progress">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 20V10M12 20V4M20 20v-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>Progress Tracker</span>
+      </button>
+      <button class="nav-item" data-target="settings">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1.04 1.56V21a2 2 0 1 1-4 0v-.09A1.7 1.7 0 0 0 8.96 19.4a1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.56-1.04H3a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.6 8.96a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.7 1.7 0 0 0 1.87.34H9a1.7 1.7 0 0 0 1.04-1.56V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1.04 1.56 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87V9a1.7 1.7 0 0 0 1.56 1.04H21a2 2 0 1 1 0 4h-.09A1.7 1.7 0 0 0 19.4 15Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <span>Settings</span>
+        <span class="badge-soon mono">SOON</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="mini-progress">
+        <span class="mono label">OVERALL PROGRESS</span>
+        <div class="mini-bar"><div class="mini-bar-fill" id="sidebarProgressFill"></div></div>
+        <span class="mono value" id="sidebarProgressValue">0%</span>
+      </div>
+    </div>
+  </aside>
+
+  <div class="sidebar-scrim" id="sidebarScrim"></div>
+
+  <!-- ============ MAIN CONTENT ============ -->
+  <main class="content">
+
+    <!-- DASHBOARD -->
+    <section class="view active" id="view-dashboard">
+      <div class="view-head">
+        <div>
+          <span class="eyebrow mono">OVERVIEW</span>
+          <h2>Dashboard</h2>
+        </div>
+      </div>
+
+      <div class="card-grid" id="dashboardCards"></div>
+
+      <div class="dash-lower">
+        <div class="panel">
+          <div class="panel-head">
+            <h3>Course Completion</h3>
+            <span class="mono muted">Auto-calculated from syllabus</span>
+          </div>
+          <div class="completion-row">
+            <div class="ring-wrap">
+              <svg viewBox="0 0 140 140" class="ring-svg">
+                <circle cx="70" cy="70" r="60" class="ring-track"/>
+                <circle cx="70" cy="70" r="60" class="ring-fill" id="ringFill"/>
+              </svg>
+              <div class="ring-center">
+                <span class="ring-number mono" id="ringNumber">0%</span>
+                <span class="ring-label">complete</span>
+              </div>
+            </div>
+            <div class="completion-bars" id="completionBars"></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h3>Latest Activity</h3>
+            <span class="mono muted" id="streakLabel">0-day streak</span>
+          </div>
+          <ul class="activity-list" id="activityList"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SYLLABUS -->
+    <section class="view" id="view-syllabus">
+      <div class="view-head">
+        <div>
+          <span class="eyebrow mono">CURRICULUM</span>
+          <h2>Syllabus</h2>
+        </div>
+        <div class="view-actions">
+          <div class="filter-chip-group" id="syllabusFilters">
+            <button class="chip active" data-filter="all">All</button>
+            <button class="chip" data-filter="Completed">Completed</button>
+            <button class="chip" data-filter="In Progress">In Progress</button>
+            <button class="chip" data-filter="Pending">Pending</button>
+            <button class="chip" data-filter="Beginner">Beginner</button>
+            <button class="chip" data-filter="Intermediate">Intermediate</button>
+            <button class="chip" data-filter="Advanced">Advanced</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="split-layout">
+        <div class="tree-panel panel">
+          <div class="panel-head"><h3>Roadmap Tree</h3></div>
+          <div class="tree-root" id="treeRoot"></div>
+        </div>
+
+        <div class="table-panel panel">
+          <div class="panel-head"><h3>Topic Register</h3></div>
+          <div class="table-scroll">
+            <table class="data-table" id="syllabusTable">
+              <thead>
+                <tr>
+                  <th>Topic</th>
+                  <th>Subtopic</th>
+                  <th>Difficulty</th>
+                  <th>Status</th>
+                  <th>Progress</th>
+                  <th>Completion Date</th>
+                  <th>Remarks</th>
+                </tr>
+              </thead>
+              <tbody id="syllabusTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUBMISSIONS -->
+    <section class="view" id="view-submissions">
+      <div class="view-head">
+        <div>
+          <span class="eyebrow mono">DAILY LOG</span>
+          <h2>Submissions</h2>
+        </div>
+        <button class="btn-primary" id="newSubmissionBtn">+ New Submission</button>
+      </div>
+
+      <div class="panel">
+        <div class="table-scroll">
+          <table class="data-table" id="submissionsTable">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Topic Name</th>
+                <th>Code Submission</th>
+                <th>Notes</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="submissionsTableBody"></tbody>
+          </table>
+        </div>
+        <p class="empty-state" id="submissionsEmpty">No submissions logged yet. Use “New Submission” to record today's work.</p>
+      </div>
+    </section>
+
+    <!-- RESEARCH NOTES -->
+    <section class="view" id="view-notes">
+      <div class="view-head">
+        <div>
+          <span class="eyebrow mono">DOCUMENTATION</span>
+          <h2>Research Notes</h2>
+        </div>
+      </div>
+      <div class="notes-grid" id="notesGrid"></div>
+      <p class="empty-state" id="notesEmpty">Notes attached to submissions will appear here.</p>
+    </section>
+
+    <!-- PROGRESS TRACKER -->
+    <section class="view" id="view-progress">
+      <div class="view-head">
+        <div>
+          <span class="eyebrow mono">ANALYTICS</span>
+          <h2>Progress Tracker</h2>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h3>Progress by Topic</h3></div>
+        <div class="progress-tracker-list" id="progressTrackerList"></div>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section class="view" id="view-settings">
+      <div class="view-head">
+        <div>
+          <span class="eyebrow mono">CONFIGURATION</span>
+          <h2>Settings</h2>
+        </div>
+      </div>
+      <div class="panel empty-panel">
+        <p>Reserved for future modules — AI Chat Assistant, GitHub Integration, Learning Analytics, Dark Mode, and more.</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ============ SUBMISSION MODAL ============ -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>New Submission</h3>
+      <button class="modal-close" id="modalClose">&times;</button>
+    </div>
+    <form id="submissionForm">
+      <div class="form-row">
+        <label>Topic</label>
+        <select id="formTopic" required></select>
+      </div>
+      <div class="form-row">
+        <label>Code File</label>
+        <div class="file-drop" id="fileDrop">
+          <input type="file" id="formFile" accept=".html,.css,.js,.py,.md,.txt">
+          <span id="fileDropLabel">Click to attach a file (.html .css .js .py .md .txt)</span>
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Notes</label>
+        <textarea id="formNotes" rows="4" placeholder="What was learned, problems faced, solutions, resources, next steps…"></textarea>
+      </div>
+      <div class="form-row checkbox-row">
+        <label class="checkbox-label"><input type="checkbox" id="formProjectDone"> Practical project completed</label>
+        <label class="checkbox-label"><input type="checkbox" id="formFullyComplete"> Mark topic fully complete</label>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn-secondary" id="cancelSubmission">Cancel</button>
+        <button type="submit" class="btn-primary">Save Submission</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
