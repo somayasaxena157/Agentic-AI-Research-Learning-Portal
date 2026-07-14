@@ -821,6 +821,9 @@ submissionForm.addEventListener('submit', (e)=>{
   const notes = document.getElementById('formNotes').value.trim();
   const projectDone = document.getElementById('formProjectDone').checked;
   const fullyComplete = document.getElementById('formFullyComplete').checked;
+  
+  // Gets the date from your new calendar input
+  const submissionDate = document.getElementById('formDate').value; 
 
   const leafNode = findLeafById(topicId);
   if(!leafNode) return;
@@ -832,7 +835,8 @@ submissionForm.addEventListener('submit', (e)=>{
   if(projectDone && p < 75) p = 75;
   if(fullyComplete) p = 100;
   leafNode.progress = p;
-  if(p >= 100 && !leafNode.completionDate) leafNode.completionDate = todayStr();
+  
+  if(p >= 100 && !leafNode.completionDate) leafNode.completionDate = submissionDate;
   if(p < 100) leafNode.completionDate = leafNode.completionDate; // keep as-is unless completed
   if(notes) leafNode.remarks = notes.length > 80 ? notes.slice(0,77)+'…' : notes;
 
@@ -840,7 +844,7 @@ submissionForm.addEventListener('submit', (e)=>{
 
   state.submissions.push({
     id: 'sub_'+Date.now(),
-    date: todayStr(),
+    date: submissionDate, // Now uses the date you selected instead of just today
     time: nowTimeStr(),
     topicId,
     topicName,
