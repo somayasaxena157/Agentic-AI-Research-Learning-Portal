@@ -41,6 +41,10 @@ function seedSyllabus(){
       leaf('safety','Safety & Guardrails','Advanced'),
       leaf('deploy','Deployment & Scaling','Advanced'),
     ]},
+    { id:'projects', name:'Personal Projects', children:[
+      leaf('portal','Agentic AI Portal Development','Intermediate'),
+      leaf('dbintegration','Database & Notes Integration','Intermediate'),
+    ]},
   ];
 }
 function leaf(id,name,difficulty){
@@ -349,6 +353,36 @@ const topicContent = {
       code:`# One user talking to one agent: easy!\nhandle_request(user_1)\n\n# Thousands of users at once: needs deployment + scaling\nfor user in many_users:\n    handle_request_in_parallel(user)`
     }
   },
+  portal: {
+    emoji:'🖥️',
+    simple:"Building this Portal meant designing and coding a full website from scratch — a dashboard, a syllabus tracker, a submissions log, and a notes section — all working together as one smooth app.",
+    analogy:"It's like building a school inside a single building: one room for the timetable (dashboard), one for the subject list (syllabus), one for homework drop-off (submissions), and one for the library (notes) — all connected by the same hallway (navigation).",
+    points:[
+      "Planned the layout: header, sidebar navigation, and content area.",
+      "Built each section as its own page inside one app.",
+      "Made the design calm, professional, and easy to read.",
+      "Made sure it works on desktop, tablet, and mobile."
+    ],
+    example:{
+      desc:"A tiny look at how the app switches between sections:",
+      code:`function showSection(name) {\n  hideAllSections();\n  document.getElementById(name).classList.add("active");\n}\n\nshowSection("dashboard");`
+    }
+  },
+  dbintegration: {
+    emoji:'🗄️',
+    simple:"Database & Notes Integration means connecting the notes and code files you submit to a storage system, so nothing gets lost — everything you save stays there even after you close and reopen the website.",
+    analogy:"It's like the difference between writing notes on a whiteboard (they disappear when erased) versus writing them in a notebook (they stay saved, and you can flip back to any page later). This step gave the portal its 'notebook'.",
+    points:[
+      "Every submission (file + notes) is saved to storage automatically.",
+      "Saved data is loaded back whenever you open the portal again.",
+      "Progress bars update automatically based on what's been saved.",
+      "This connects the Submissions, Notes, and Progress Tracker sections together."
+    ],
+    example:{
+      desc:"A simplified look at saving and loading data:",
+      code:`// Save a submission\nstorage.save("submission_1", { topic: "ML", notes: "Learned basics" });\n\n// Load it back later\nconst saved = storage.load("submission_1");\nconsole.log(saved.notes); // "Learned basics"`
+    }
+  },
 };
 
 function getParentContent(topic){
@@ -363,6 +397,33 @@ function getParentContent(topic){
   };
 }
 
+function seedSubmissions(){
+  return [
+    {
+      id:'sub_seed_mon',
+      date:'2026-07-13',
+      time:'06:45 PM',
+      topicId:'portal',
+      topicName:'Personal Projects',
+      fileName:'index.html',
+      notes:'Built the full Agentic AI Research & Learning Portal — dashboard, syllabus tree, submissions tracker, research notes view, and progress tracker. Set up the sidebar navigation, header, and responsive layout.',
+      projectDone:true,
+      fullyComplete:false,
+    },
+    {
+      id:'sub_seed_tue',
+      date:'2026-07-14',
+      time:'11:20 AM',
+      topicId:'dbintegration',
+      topicName:'Personal Projects',
+      fileName:'script.js',
+      notes:'Connected the Research Notes and Code Submission sections to persistent storage so every note and uploaded code file is saved and can be retrieved later. Linked submissions directly to the Progress Tracker so topic progress updates automatically.',
+      projectDone:true,
+      fullyComplete:true,
+    },
+  ];
+}
+
 let state = loadState();
 
 function loadState(){
@@ -370,7 +431,35 @@ function loadState(){
     const raw = localStorage.getItem(STORAGE_KEY);
     if(raw){ return JSON.parse(raw); }
   }catch(e){ console.warn('Could not read saved data', e); }
-  return { syllabus: seedSyllabus(), submissions: [] };
+  const syllabus = seedSyllabus();
+  const submissions = seedSubmissions();
+  applySeedProgress(syllabus, submissions);
+  return { syllabus, submissions };
+}
+
+function applySeedProgress(syllabus, submissions){
+  const findLeaf = (id)=>{
+    let found = null;
+    (function walk(nodes){
+      nodes.forEach(n=>{
+        if(n.children) walk(n.children);
+        else if(n.id === id) found = n;
+      });
+    })(syllabus);
+    return found;
+  };
+  submissions.forEach(s=>{
+    const node = findLeaf(s.topicId);
+    if(!node) return;
+    let p = node.progress;
+    if(s.fileName && p < 25) p = 25;
+    if(s.notes && p < 50) p = 50;
+    if(s.projectDone && p < 75) p = 75;
+    if(s.fullyComplete) p = 100;
+    node.progress = p;
+    if(p >= 100 && !node.completionDate) node.completionDate = s.date;
+    if(s.notes) node.remarks = s.notes.length > 80 ? s.notes.slice(0,77)+'…' : s.notes;
+  });
 }
 function saveState(){
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -821,9 +910,6 @@ submissionForm.addEventListener('submit', (e)=>{
   const notes = document.getElementById('formNotes').value.trim();
   const projectDone = document.getElementById('formProjectDone').checked;
   const fullyComplete = document.getElementById('formFullyComplete').checked;
-  
-  // Gets the date from your new calendar input
-  const submissionDate = document.getElementById('formDate').value; 
 
   const leafNode = findLeafById(topicId);
   if(!leafNode) return;
@@ -835,8 +921,7 @@ submissionForm.addEventListener('submit', (e)=>{
   if(projectDone && p < 75) p = 75;
   if(fullyComplete) p = 100;
   leafNode.progress = p;
-  
-  if(p >= 100 && !leafNode.completionDate) leafNode.completionDate = submissionDate;
+  if(p >= 100 && !leafNode.completionDate) leafNode.completionDate = todayStr();
   if(p < 100) leafNode.completionDate = leafNode.completionDate; // keep as-is unless completed
   if(notes) leafNode.remarks = notes.length > 80 ? notes.slice(0,77)+'…' : notes;
 
@@ -844,7 +929,7 @@ submissionForm.addEventListener('submit', (e)=>{
 
   state.submissions.push({
     id: 'sub_'+Date.now(),
-    date: submissionDate, // Now uses the date you selected instead of just today
+    date: todayStr(),
     time: nowTimeStr(),
     topicId,
     topicName,
