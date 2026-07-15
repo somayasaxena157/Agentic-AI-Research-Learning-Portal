@@ -929,7 +929,7 @@ submissionForm.addEventListener('submit', (e)=>{
 
   state.submissions.push({
     id: 'sub_'+Date.now(),
-    date: todayStr(),
+    date: document.getElementById('formDate').value,
     time: nowTimeStr(),
     topicId,
     topicName,
