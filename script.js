@@ -2,7 +2,7 @@
    AGENTIC AI RESEARCH & LEARNING PORTAL — APP LOGIC
    ============================================================ */
 
-const STORAGE_KEY = 'agentic_ai_portal_data_v1';
+const STORAGE_KEY = 'agentic_ai_portal_data_v2';
 
 /* ---------- Seed data ---------- */
 function seedSyllabus(){
