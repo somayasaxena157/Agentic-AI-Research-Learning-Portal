@@ -1,3 +1,5 @@
+import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
 /* ============================================================
    AGENTIC AI RESEARCH & LEARNING PORTAL — APP LOGIC
    ============================================================ */
@@ -430,15 +432,27 @@ function seedSubmissions(){
 
 let state = loadState();
 
-function loadState(){
-  try{
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if(raw){ return JSON.parse(raw); }
-  }catch(e){ console.warn('Could not read saved data', e); }
-  const syllabus = seedSyllabus();
-  const submissions = seedSubmissions();
-  applySeedProgress(syllabus, submissions);
-  return { syllabus, submissions };
+// NEW: Load from Firestore
+async function loadState() {
+  if (!window.db) return { syllabus: seedSyllabus(), submissions: seedSubmissions() };
+  
+  try {
+    const docRef = doc(window.db, "users", "my_data");
+    const docSnap = await getDoc(docRef);
+    
+    if (docSnap.exists()) {
+      console.log("Data loaded from Firebase!");
+      return docSnap.data();
+    } else {
+      console.log("No saved data found, using defaults.");
+      const defaultState = { syllabus: seedSyllabus(), submissions: seedSubmissions() };
+      applySeedProgress(defaultState.syllabus, defaultState.submissions);
+      return defaultState;
+    }
+  } catch (e) {
+    console.error("Error loading data: ", e);
+    return { syllabus: seedSyllabus(), submissions: seedSubmissions() };
+  }
 }
 
 function applySeedProgress(syllabus, submissions){
@@ -465,8 +479,17 @@ function applySeedProgress(syllabus, submissions){
     if(s.notes) node.remarks = s.notes.length > 80 ? s.notes.slice(0,77)+'…' : s.notes;
   });
 }
-function saveState(){
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+
+// NEW: Save to Firestore
+async function saveState() {
+  if (!window.db) return;
+  try {
+    const docRef = doc(window.db, "users", "my_data");
+    await setDoc(docRef, state);
+    console.log("Data saved to Firebase!");
+  } catch (e) {
+    console.error("Error saving data: ", e);
+  }
 }
 
 /* ---------- Helpers ---------- */
@@ -1071,4 +1094,11 @@ function escapeHtml(str){
 /* ============================================================
    INIT
    ============================================================ */
-renderAll();
+/* ============================================================
+   INIT
+   ============================================================ */
+(async () => {
+  state = await loadState();
+  renderAll();
+})();
+
