@@ -836,7 +836,6 @@ function renderSubmissions(){
     });
   });
 }
-}
 
 /* ============================================================
    RENDER: RESEARCH NOTES
