@@ -305,6 +305,11 @@ input, select, textarea{font-family: 'Inter', sans-serif;}
 
 .remarks-cell{color:var(--text-muted); max-width:220px;}
 .file-chip{display:inline-flex; align-items:center; gap:6px; background:var(--bg-secondary); border:1px solid var(--border); padding:4px 10px; border-radius:7px; font-size:11px; font-family: 'Inter', sans-serif;}
+.delete-btn{
+  background:none; border:1px solid var(--border); border-radius:7px; width:30px; height:30px;
+  font-size:13px; color:var(--danger); transition:background .15s var(--ease), border-color .15s var(--ease);
+}
+.delete-btn:hover{background:#FEE2E2; border-color:var(--danger);}
 .notes-cell{max-width:260px; color:var(--text-muted); cursor:pointer;}
 .notes-cell.collapsed{white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:block;}
 
