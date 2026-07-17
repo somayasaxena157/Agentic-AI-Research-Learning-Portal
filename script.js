@@ -4,418 +4,422 @@
 
 const STORAGE_KEY = 'agentic_ai_portal_data_v2';
 
-/* ---------- Seed data ---------- */
-function seedSyllabus(){
-  return [
-    { id:'foundations', name:'Artificial Intelligence Foundations', children:[
-      leaf('ml','Machine Learning','Beginner'),
-      { id:'dl', name:'Deep Learning', difficulty:'Intermediate', children:[
-          leaf('nn','Neural Networks','Intermediate')
-        ]},
-      leaf('llm','Large Language Models','Advanced'),
-      leaf('prompt','Prompt Engineering','Beginner'),
-    ]},
-    { id:'agentic-core', name:'Agentic AI Core Concepts', children:[
-      leaf('arch','Agent Architectures','Intermediate'),
-      leaf('tools','Tool Use & Function Calling','Intermediate'),
-      leaf('memory','Memory Systems','Advanced'),
-      leaf('planning','Planning & Reasoning','Advanced'),
-    ]},
-    { id:'frameworks', name:'Frameworks & Tooling', children:[
-      leaf('langchain','LangChain','Intermediate'),
-      leaf('langgraph','LangGraph','Advanced'),
-      leaf('autogen','AutoGen','Advanced'),
-      leaf('crewai','CrewAI','Intermediate'),
-    ]},
-    { id:'retrieval', name:'Retrieval & Knowledge Systems', children:[
-      leaf('vectordb','Vector Databases','Intermediate'),
-      leaf('rag','RAG Pipelines','Intermediate'),
-      leaf('kg','Knowledge Graphs','Advanced'),
-    ]},
-    { id:'multiagent', name:'Multi-Agent Systems', children:[
-      leaf('protocols','Agent Communication Protocols','Advanced'),
-      leaf('orchestration','Orchestration Patterns','Advanced'),
-    ]},
-    { id:'production', name:'Production & Deployment', children:[
-      leaf('eval','Evaluation & Observability','Intermediate'),
-      leaf('safety','Safety & Guardrails','Advanced'),
-      leaf('deploy','Deployment & Scaling','Advanced'),
-    ]},
-    { id:'projects', name:'Personal Projects', children:[
-      leaf('portal','Agentic AI Portal Development','Intermediate'),
-      leaf('dbintegration','Database & Notes Integration','Intermediate'),
-    ]},
-  ];
-}
-function leaf(id,name,difficulty){
-  return { id, name, difficulty, progress:0, completionDate:null, remarks:'—', leaf:true };
+/* ============================================================
+   SYLLABUS DATA — Agentic AI Journey (15 tracks, official curriculum)
+   Each item: [Title, Resource Type]
+   ============================================================ */
+const trackData = [
+  { name:'Agentic AI - Getting Started with Python and ChatGPT', items:[
+    ['Python for Developers Literacy (Beginner Level)','Skill Benchmark'],
+    ['Python Fundamentals with AI','Interactive Course'],
+    ['Python Fundamentals with AI Cheatsheet','Cheatsheet'],
+    ['Python Fundamentals with AI Lab: Student Grade Tracker','Lab'],
+    ['ChatGPT Literacy (Beginner Level)','Skill Benchmark'],
+    ['Intermediate Prompt Engineering Techniques','Interactive Course'],
+    ['Intermediate Prompt Engineering Techniques Cheatsheet','Cheatsheet'],
+    ['Python Best Practices with AI','Interactive Course'],
+    ['Python Best Practices with AI Cheatsheet','Cheatsheet'],
+    ['AI-Assisted Testing and Debugging Strategies','Interactive Course'],
+    ['First Look: GPT-5','Course'],
+    ['ChatGPT & Its Practical Use Cases','Course'],
+    ['ChatGPT Prompt Engineering Examples & Use Cases','Course'],
+  ]},
+  { name:'Agentic AI - Data Types, Variables and Control Flow', items:[
+    ['Control Structures and Loops','Video'],
+    ['Python Object-Oriented Programming with AI','Interactive Course'],
+    ['Python Object-Oriented Programming with AI Cheatsheet','Cheatsheet'],
+    ['Introduction to AI Agents with Flowise Skillshort','Interactive Course'],
+    ['Introduction to AI Agents with Flowise Skillshort Cheatsheet','Cheatsheet'],
+    ['Introduction to AI Programming with Bolt Skillshort','Interactive Course'],
+    ['Introduction to AI Programming with Bolt Skillshort Cheatsheet','Cheatsheet'],
+    ['Using Generative AI for Helpdesk Operations','AI Simulator'],
+    ['Introduction to AI Programming with V0 Skillshort','Interactive Course'],
+    ['Introduction to AI Programming with V0 Skillshort Cheatsheet','Cheatsheet'],
+    ['AI Chatbots for Stakeholder Self-Service','Video'],
+  ]},
+  { name:'Agentic AI - Functions and Working with Libraries', items:[
+    ['Python Collections with AI','Interactive Course'],
+    ['Python Collections with AI Cheatsheet','Cheatsheet'],
+    ['Node.js Fundamentals with AI','Interactive Course'],
+    ['Node.js Fundamentals with AI Cheatsheet','Cheatsheet'],
+    ['Node.js Fundamentals with AI Lab: Expense Tracker CLI','Lab'],
+    ['Building a Calculator Tool in LangChain','Video'],
+    ['Create Scalable APIs Using AI','Interactive Course'],
+    ['Create Scalable APIs Using AI Cheatsheet','Cheatsheet'],
+    ['API Development Competency (Intermediate Level)','Skill Benchmark'],
+    ['Python API Development Competency (Intermediate Level)','Skill Benchmark'],
+    ['API Testing with REST Assured Java Competency (Intermediate Level)','Skill Benchmark'],
+    ['ETL and ELT Pipelines','Video'],
+    ['Creating a Custom Weather Tool in LangChain','Video'],
+    ['Using Simple Geocode APIs','Video'],
+  ]},
+  { name:'Agentic AI - Agentic Tools', items:[
+    ['Using Prompt Engineering Prompt Templates','Video'],
+    ['Prompt Engineering Patterns Lab: Prompt Patterns for Structured Frameworks','Lab'],
+    ['Using Tools with Agentic AI','Video'],
+    ['Building Tool Calling Agents with LangGraph: A Complete Guide','Link'],
+    ['Agentic AI in Action: Tool Use with LangChain','Course'],
+    ['Agentic AI in Action: Hands-On with LangChain','Course'],
+    ['Combining Multiple Tools in LangChain Agents','Video'],
+  ]},
+  { name:'Agentic AI - Introduction to Agentic AI', items:[
+    ['Inside Agentic AI: Foundations and Frontiers','Course'],
+    ['Agentic AI Design Patterns: Reusable Blueprints for Smarter Systems','Course'],
+    ['Leading Ethical AI Transformation','AI Simulator'],
+    ['Balancing Innovation and Ethics in AI Projects','AI Simulator'],
+    ['AI in the IT Industry: Automating and Optimizing IT Operations','AI Simulator'],
+  ]},
+  { name:'Agentic AI - Programming and Frameworks for Agentic Systems', items:[
+    ['Inside Agentic AI: Popular Frameworks','Course'],
+    ['AI Agents and Workflows','Interactive Course'],
+    ['Flows Types','Video'],
+    ['Using Tools with Agentic AI','Video'],
+    ['Introduction to AI Agents with Flowise Skillshort','Interactive Course'],
+    ['Introduction to AI Agents with Flowise Skillshort Cheatsheet','Cheatsheet'],
+  ]},
+  { name:'Agentic AI - Large Language Models (LLMs)', items:[
+    ['LLM Fundamentals','Video'],
+    ['Large Language Models (LLMs)','Video'],
+    ['Large Language Model Architecture','Video'],
+    ['Large Language Model Concepts','Video'],
+    ['LLM Types','Video'],
+    ['Percipio - Understanding the Architecture of LLMs and How They Interpret Prompts','Link'],
+    ['Introduction to Large Language Models (LLMs) Cheatsheet','Cheatsheet'],
+    ['Natural Language Processing Awareness (Beginner Level)','Skill Benchmark'],
+    ['Introduction to Neural Network Architectures','Interactive Course'],
+    ['Introduction to Neural Network Architectures Cheatsheet','Cheatsheet'],
+    ['Advanced Neural Network Architectures','Interactive Course'],
+    ['Advanced Neural Network Architectures Cheatsheet','Cheatsheet'],
+    ['Working With Memory in LangChain','Interactive Course'],
+    ['Intermediate Prompt Engineering Techniques','Interactive Course'],
+    ['Prompt Engineering Techniques Cheatsheet','Cheatsheet'],
+    ['Prompt Engineering Fundamentals for Programmers Competency (Intermediate Level)','Skill Benchmark'],
+    ['The Transformer Architecture: Part I','Video'],
+    ['The Transformer Architecture: Part II','Video'],
+    ['Large Language Model (LLM) Throughput','Video'],
+  ]},
+  { name:'Agentic AI - Embedding Models and Vector Basics', items:[
+    ['Generating Embeddings and Computing Cosine Similarity','Video'],
+    ['Computing Distance Metrics: Euclidean, Manhattan, Cosine','Video'],
+    ['Comprehensive AI & Data Science Skills Assessment','Skill Benchmark'],
+    ['CompTIA DataAI: Linear Algebra, Calculus, and Temporal Models','Course'],
+    ['Using Vector Search','Video'],
+    ['Data Visualization in Python with Seaborn and Altair Competency (Intermediate Level)','Skill Benchmark'],
+    ['Clustering and Visualising Documents using Word Embeddings','Link'],
+  ]},
+  { name:'Agentic AI - Agent Architectures and Collaboration', items:[
+    ['Inside Agentic AI: Core Architecture of Agentic Systems','Course'],
+    ['Multi Agent Deployments','Video'],
+    ['AI Collaboration Protocols','Course'],
+  ]},
+  { name:'Agentic AI - Memory and Knowledge Retrieval in Agents', items:[
+    ['Word Embeddings and Semantic Analysis','Video'],
+    ['Understanding Word, Sentence, Document, and Multimodal Embeddings in Large Language Models','Link'],
+    ['Visualizing Word Embeddings Using the Embedding Projector Plug-in','Video'],
+    ['Representing Words Using Embeddings','Video'],
+    ['Using Vector Search as the Vector Database for RAG Engine','Video'],
+    ['Creating and Deploying a Vector Search Index','Video'],
+    ['Creating and Using Vector Indexes for Search','Video'],
+    ['Working with OpenAI Storage and Vector Stores','Video'],
+    ['Storing Embeddings Within Vector Databases','Video'],
+    ['Using the File Search Tool','Video'],
+  ]},
+  { name:'Agentic AI - Prompt Engineering and Adaptive Instructions', items:[
+    ['Prompt Engineering Patterns','Interactive Course'],
+    ['Prompt Engineering Patterns Cheatsheet','Cheatsheet'],
+    ['Prompt Engineering and Prompt Tuning','Video'],
+    ['Feedback-Driven Agent Loops','Video'],
+    ['Prompt Caching and Prompt Optimization','Video'],
+  ]},
+  { name:'Agentic AI - Advanced Retrieval-Augmented Generation (RAG)', items:[
+    ['Retrieval Augmented Generation (RAG)','Video'],
+    ['The Retrieval-Augmented Generation (RAG) Process','Video'],
+    ['Retrieval-Augmented Generation (RAG) — Overview','Video'],
+    ['Retrieval-Augmented Generation (RAG) — In Practice','Video'],
+    ['Haystack: Modular RAG Pipelines','Video'],
+    ['RAG with LangChain','Video'],
+    ['Implementing Multi-Source RAG','Video'],
+    ['Agents and Retrieval Systems in LangChain','Interactive Course'],
+    ['Agents and Retrieval Systems in LangChain Cheatsheet','Cheatsheet'],
+    ['Agents and Retrieval Systems in LangChain Lab: Building an Intelligent LangChain Agent with RAG','Lab'],
+    ['Exploring RAG Architecture with OCI Generative AI Agents','Video'],
+    ['Building and Exposing a RAG Service with FastAPI','Video'],
+    ['RAG Essentials: Why We Need It?','Video'],
+    ['LLMs on Google Cloud: Retrieval-Augmented Generation (RAGs) on Vertex AI','Course'],
+    ['RAG Techniques Cheatsheet','Cheatsheet'],
+    ['RAG Foundations','Course'],
+    ['Azure AI Engineer Associate: Retrieval Augmented Generation','Course'],
+  ]},
+  { name:'Agentic AI - Ethics, Safety and Governance in Agentic AI', items:[
+    ['Managing AI Risk in Projects','AI Simulator'],
+    ['AI Product Manager: Navigating Governance and Risk Review','AI Simulator'],
+    ['Securing AI: AI Governance, Ethics, & Compliance','Course'],
+  ]},
+  { name:'Agentic AI - Real-World Applications and Case Studies', items:[
+    ['AI User Stories: Key Differences from Traditional Stories','Video'],
+    ['Building Your Own Agentic Workflows','Video'],
+    ['Real-World AI Failure Case Studies','Video'],
+    ['Agentic Workflows in Action','Video'],
+    ['Automating Tasks with the Workflows Agent in Microsoft 365 Copilot','Video'],
+    ['Practical AI Agents in the Workplace','Course'],
+    ['Workflow Automation: AI-Based Resume Filtering Using n8n','Lab'],
+  ]},
+  { name:'Agentic AI - Capstone Project – Build Your Own Agent', items:[
+    ['AI Development Tools','Course'],
+    ['Building Effective AI Agents','Link'],
+    ['Creating Agents with Microsoft 365 Copilot Agent Builder','Video'],
+    ['Create an Agent in the Agents Playground','Video'],
+    ['Creating an Agent in Copilot Studio','Video'],
+    ['Capstone Project: Build an AI Agent for Travel Planning','Lab'],
+  ]},
+];
+
+/* Extra, non-official track used to log the building of this very portal */
+const portfolioTrack = {
+  name:'Portfolio Log — Building This Portal', portfolio:true, items:[
+    ['Website Build — Dashboard, Syllabus & Submissions UI','Project'],
+    ['Website Build — Progress Tracker & Research Notes UI','Project'],
+    ['Database Integration — Notes & Code File Storage','Project'],
+  ]
+};
+
+function inferDifficulty(title){
+  if(/beginner/i.test(title)) return 'Beginner';
+  if(/advanced/i.test(title)) return 'Advanced';
+  if(/intermediate/i.test(title)) return 'Intermediate';
+  return null; // resolved by track position if not explicit
 }
 
-/* ---------- Kid-friendly topic content (for detail popup) ---------- */
-const topicContent = {
-  ml: {
-    emoji:'🤖',
-    simple:"Machine Learning is how we teach a computer to get better at something just by showing it lots of examples — instead of writing exact step-by-step instructions for every situation.",
-    analogy:"Think of teaching a dog to sit. You don't explain the physics of sitting — you show it over and over with treats until it learns the pattern. Machine learning is the same idea, but with a computer and data instead of a dog and treats.",
-    points:[
-      "The computer looks at lots of examples (called 'data').",
-      "It finds patterns in those examples on its own.",
-      "The more good examples it sees, the smarter it gets.",
-      "Once trained, it can guess the answer for new examples it has never seen."
-    ],
-    example:{
-      desc:"A tiny example: teaching a computer to guess if a fruit is an apple or a banana by its color and shape.",
-      code:`fruits = [\n  {"color": "red", "shape": "round", "label": "apple"},\n  {"color": "yellow", "shape": "long", "label": "banana"},\n]\n\n# The computer studies these examples,\n# then guesses new fruits based on the pattern it learned.\nnew_fruit = {"color": "yellow", "shape": "long"}\nguess = "banana"  # learned from the pattern above`
-    }
+function seedSyllabus(){
+  const allTracks = [...trackData, portfolioTrack];
+  return allTracks.map((track, ti)=>{
+    const tierDefault = ti <= 2 ? 'Beginner' : (ti <= 10 ? 'Intermediate' : 'Advanced');
+    return {
+      id: track.portfolio ? 'portfolio' : ('t'+(ti+1)),
+      name: track.name,
+      portfolio: !!track.portfolio,
+      children: track.items.map((item, ii)=>{
+        const [name, type] = item;
+        return {
+          id: (track.portfolio ? 'portfolio' : ('t'+(ti+1))) + '-i' + (ii+1),
+          name,
+          type,
+          difficulty: inferDifficulty(name) || tierDefault,
+          progress: 0,
+          completionDate: null,
+          remarks: type,
+          leaf: true,
+        };
+      })
+    };
+  });
+}
+
+/* ============================================================
+   KID-FRIENDLY TOPIC CONTENT (keyword-matched, for the detail popup)
+   ============================================================ */
+const contentRules = [
+  { re:/transformer/i, emoji:'🔧',
+    simple:"The Transformer is the special design that powers most modern AI language models. It lets the AI look at an entire sentence at once and figure out which words matter most to each other, instead of reading one word at a time.",
+    analogy:"Imagine reading a mystery novel and being able to instantly see how every clue connects to every other clue, instead of just remembering them one at a time. That's what the Transformer design lets the AI do with words.",
+    points:["Looks at a whole sentence at once instead of word-by-word.","Uses 'attention' to decide which words matter most.","Is the core design behind models like GPT.","Made today's fast, powerful AI chatbots possible."],
+    example:{ desc:"A simplified idea of 'attention' — deciding which words matter:", code:`sentence = "The cat sat on the mat because it was tired"\n\n# "it" mostly relates back to "cat" — attention helps\n# the model figure that connection out automatically\nattention_focus = {"it": "cat"}` }
   },
-  nn: {
-    emoji:'🧠',
+  { re:/neural network/i, emoji:'🧠',
     simple:"A Neural Network is a computer program built to work a little like a brain. It has tiny building blocks called 'neurons' that pass information to each other and learn patterns together.",
     analogy:"Imagine a big team of friends passing notes. Each friend only does one small job — like checking one clue — then passes their answer to the next friend. Together, the whole team solves a big puzzle.",
-    points:[
-      "Made of layers of tiny units called neurons.",
-      "Each neuron looks at a small piece of the information.",
-      "Layers pass their findings to the next layer.",
-      "The last layer gives the final answer, like 'cat' or 'dog'."
-    ],
-    example:{
-      desc:"A super-simplified neural network idea for recognizing a smiley face:",
-      code:`# Layer 1: looks for basic shapes (circles, curves)\n# Layer 2: combines shapes into eyes + a mouth\n# Layer 3: decides "this looks like a smiley face!"\n\ninput_image = "🙂"\nresult = "smiley face detected"`
-    }
+    points:["Made of layers of tiny units called neurons.","Each neuron looks at a small piece of the information.","Layers pass their findings to the next layer.","The last layer gives the final answer, like 'cat' or 'dog'."],
+    example:{ desc:"A super-simplified neural network idea for recognizing a smiley face:", code:`# Layer 1: looks for basic shapes (circles, curves)\n# Layer 2: combines shapes into eyes + a mouth\n# Layer 3: decides "this looks like a smiley face!"\n\ninput_image = "🙂"\nresult = "smiley face detected"` }
   },
-  llm: {
-    emoji:'💬',
+  { re:/\bllm\b|large language model/i, emoji:'💬',
     simple:"A Large Language Model (LLM) is a computer program that has read a huge amount of text and learned how words usually follow each other, so it can write, chat, and answer questions like a person.",
     analogy:"It's like a friend who has read millions of books and can guess what word comes next in a sentence — over and over, one word at a time — until a whole answer is written.",
-    points:[
-      "Trained on huge amounts of text from books, articles, and websites.",
-      "Learns which words usually go together.",
-      "Writes answers one word (or piece of a word) at a time.",
-      "Can chat, translate, summarize, and even write code."
-    ],
-    example:{
-      desc:"How an LLM finishes a sentence, one word at a time:",
-      code:`prompt = "The sun rises in the"\n\n# The model predicts the most likely next word\nnext_word = "east"\n\n# It keeps going, word by word, to build a full answer`
-    }
+    points:["Trained on huge amounts of text from books, articles, and websites.","Learns which words usually go together.","Writes answers one word (or piece of a word) at a time.","Can chat, translate, summarize, and even write code."],
+    example:{ desc:"How an LLM finishes a sentence, one word at a time:", code:`prompt = "The sun rises in the"\n\n# The model predicts the most likely next word\nnext_word = "east"\n\n# It keeps going, word by word, to build a full answer` }
   },
-  prompt: {
-    emoji:'✍️',
+  { re:/prompt/i, emoji:'✍️',
     simple:"Prompt Engineering is the skill of asking an AI clear and helpful questions so it gives you the best possible answer — kind of like asking a good question to get a good answer from a teacher.",
-    analogy:"If you ask 'tell me stuff,' you'll get a confusing answer. But if you ask 'explain photosynthesis in 3 simple sentences for a 8-year-old,' you get something much more useful. That's prompt engineering!",
-    points:[
-      "Be clear and specific about what you want.",
-      "Give examples if it helps explain what you mean.",
-      "Tell the AI who the answer is for (like 'explain to a kid').",
-      "Ask it to think step-by-step for tricky problems."
-    ],
-    example:{
-      desc:"A weak prompt vs. a strong prompt:",
-      code:`# Weak prompt\n"Tell me about space."\n\n# Strong prompt\n"Explain why the sky is blue in 3 simple\nsentences, like you're talking to a curious 8-year-old."`
-    }
+    analogy:"If you ask 'tell me stuff,' you'll get a confusing answer. But if you ask 'explain photosynthesis in 3 simple sentences for an 8-year-old,' you get something much more useful. That's prompt engineering!",
+    points:["Be clear and specific about what you want.","Give examples if it helps explain what you mean.","Tell the AI who the answer is for (like 'explain to a kid').","Ask it to think step-by-step for tricky problems."],
+    example:{ desc:"A weak prompt vs. a strong prompt:", code:`# Weak prompt\n"Tell me about space."\n\n# Strong prompt\n"Explain why the sky is blue in 3 simple\nsentences, like you're talking to a curious 8-year-old."` }
   },
-  arch: {
-    emoji:'🏗️',
-    simple:"Agent Architecture is the blueprint for how an AI 'agent' is built — how it thinks, remembers things, uses tools, and decides what to do next, step by step, to finish a task.",
-    analogy:"It's like the flowchart for a robot helper: first it listens to what you want, then it thinks about a plan, then it acts, then it checks if it worked — and repeats until the job is done.",
-    points:[
-      "An agent usually has 4 jobs: sense, think, act, and check.",
-      "It can loop through these steps multiple times.",
-      "It decides on its own which tool or step to use next.",
-      "Good architecture keeps the agent organized and less confused."
-    ],
-    example:{
-      desc:"A simple loop that shows how an agent thinks:",
-      code:`while task_not_done:\n    observation = look_at_situation()\n    plan = decide_next_step(observation)\n    result = do_action(plan)\n    task_not_done = check_if_finished(result)`
-    }
-  },
-  tools: {
-    emoji:'🛠️',
-    simple:"Tool Use & Function Calling means giving an AI extra 'tools' it can use — like a calculator, a search engine, or a calendar — so it isn't limited to just talking. It can actually do things.",
-    analogy:"It's like giving a smart assistant a toolbox. Instead of just guessing a math answer, it can pick up the calculator tool and get the exact right number.",
-    points:[
-      "The AI is given a list of tools it's allowed to use.",
-      "It decides which tool fits the current problem.",
-      "It calls the tool with the right information.",
-      "It uses the tool's answer to keep helping you."
-    ],
-    example:{
-      desc:"An AI deciding to use a calculator tool:",
-      code:`user_question = "What is 482 * 17?"\n\n# The AI recognizes this needs the calculator tool\ntool_call = calculator(482, "*", 17)\nanswer = tool_call.result  # 8194`
-    }
-  },
-  memory: {
-    emoji:'🗂️',
-    simple:"Memory Systems let an AI agent remember things from earlier — like your name, what you asked before, or facts it learned — so it doesn't forget everything after each message.",
-    analogy:"It's like giving the AI a notebook. Without a notebook, it forgets you the moment you stop talking. With one, it can flip back and remember what you told it yesterday.",
-    points:[
-      "Short-term memory: remembers the current conversation.",
-      "Long-term memory: saves important facts for later use.",
-      "Memories can be stored and searched, like a filing cabinet.",
-      "Good memory makes an agent feel more helpful and personal."
-    ],
-    example:{
-      desc:"A tiny memory notebook for an agent:",
-      code:`memory = {}\n\nmemory["favorite_color"] = "blue"\n\n# Later in a new conversation...\nif "favorite_color" in memory:\n    print("I remember! Your favorite color is " + memory["favorite_color"])`
-    }
-  },
-  planning: {
-    emoji:'🧩',
-    simple:"Planning & Reasoning is how an AI breaks a big, tricky task into smaller steps and figures out the best order to do them — instead of just guessing the whole answer at once.",
-    analogy:"It's like planning a birthday party. You don't just 'have a party' — you break it into steps: pick a date, invite friends, buy a cake, decorate. Planning helps the AI do the same for hard problems.",
-    points:[
-      "Break a big goal into smaller, doable steps.",
-      "Think about what needs to happen first, second, third.",
-      "Check progress and adjust the plan if something goes wrong.",
-      "This helps the AI solve problems it couldn't solve in one guess."
-    ],
-    example:{
-      desc:"Breaking a big task into a simple plan:",
-      code:`goal = "Plan a birthday party"\n\nsteps = [\n  "Pick a date",\n  "Make a guest list",\n  "Send invitations",\n  "Buy decorations and cake"\n]`
-    }
-  },
-  langchain: {
-    emoji:'🔗',
-    simple:"LangChain is a toolkit that helps developers connect an AI model to other things — like documents, tools, and memory — so it's easier to build a full AI application instead of starting from scratch.",
-    analogy:"Think of LEGO bricks for building AI apps. LangChain gives you ready-made bricks (pieces) for memory, tools, and data, so you can snap them together quickly.",
-    points:[
-      "Provides ready-made building blocks for AI apps.",
-      "Helps connect the AI to your own documents and data.",
-      "Makes it easier to add memory and tools to an AI.",
-      "Popular for building chatbots and AI assistants."
-    ],
-    example:{
-      desc:"A very simplified LangChain-style chain:",
-      code:`chain = load_documents() | ask_question() | get_answer()\n\nanswer = chain.run("What does this PDF say about refunds?")`
-    }
-  },
-  langgraph: {
-    emoji:'🕸️',
-    simple:"LangGraph is a tool for building AI agents as a 'graph' of steps — like a flowchart with arrows — so the agent can loop, branch, and make decisions instead of just following one straight line.",
-    analogy:"Imagine a board game with different paths you can take depending on what happens. LangGraph lets developers draw that kind of map for an AI agent's thinking process.",
-    points:[
-      "Agent steps are drawn like a flowchart (a graph).",
-      "The agent can loop back and try again if needed.",
-      "It can branch into different paths depending on the situation.",
-      "Useful for agents that need multiple rounds of thinking."
-    ],
-    example:{
-      desc:"A simple graph-style flow:",
-      code:`graph.add_step("research")\ngraph.add_step("write_answer")\ngraph.add_edge("research", "write_answer")\n\n# If the answer isn't good enough, loop back to research\ngraph.add_edge("write_answer", "research", condition="needs_more_info")`
-    }
-  },
-  autogen: {
-    emoji:'🤝',
-    simple:"AutoGen is a framework that lets you create multiple AI agents that talk to each other to solve a problem together — like a little team of AI helpers working as a group.",
-    analogy:"Imagine two classmates working on a project: one writes the answer, and the other checks it for mistakes. AutoGen makes it easy to set up AI 'classmates' like that.",
-    points:[
-      "Lets you create more than one AI agent at once.",
-      "Agents can send messages to each other automatically.",
-      "One agent might write, another might review or fix mistakes.",
-      "Useful for tasks that are easier with teamwork."
-    ],
-    example:{
-      desc:"Two agents working together:",
-      code:`writer_agent = Agent("Writer")\nreviewer_agent = Agent("Reviewer")\n\ndraft = writer_agent.write("a poem about robots")\nfeedback = reviewer_agent.review(draft)`
-    }
-  },
-  crewai: {
-    emoji:'👥',
-    simple:"CrewAI is a framework for building a 'crew' of AI agents, where each agent has its own job or role — like a researcher, a writer, and an editor — all working together on one big task.",
-    analogy:"It's like assembling a mini company: one AI is the researcher who gathers facts, another is the writer who turns facts into a story, and another checks everything before it's done.",
-    points:[
-      "Each agent gets a specific role and goal.",
-      "Agents pass their work to the next agent in the crew.",
-      "Great for tasks with clear steps done by different 'experts'.",
-      "Helps organize complex AI projects into simple roles."
-    ],
-    example:{
-      desc:"Setting up a small crew:",
-      code:`researcher = Agent(role="Researcher", goal="Find facts")\nwriter = Agent(role="Writer", goal="Write a report")\n\ncrew = Crew(agents=[researcher, writer])\nresult = crew.run("Write a report about volcanoes")`
-    }
-  },
-  vectordb: {
-    emoji:'📦',
-    simple:"A Vector Database is a special storage system that saves information in a way that makes it easy for an AI to find things that 'mean' something similar — not just exact word matches.",
-    analogy:"Imagine a toy box where similar toys are always placed near each other automatically — all the cars together, all the dolls together — so when you want 'something like a car,' you know exactly where to look.",
-    points:[
-      "Stores information as lists of numbers called 'vectors'.",
-      "Similar meanings end up stored close together.",
-      "Helps AI search by meaning, not just exact words.",
-      "Used to help AI find the right facts quickly."
-    ],
-    example:{
-      desc:"Finding similar items using a vector database:",
-      code:`db.add("a happy dog playing")\ndb.add("a joyful puppy running")\ndb.add("a car engine part")\n\nresults = db.search("cheerful puppy")\n# returns the two dog-related entries first`
-    }
-  },
-  rag: {
-    emoji:'📚',
+  { re:/\brag\b|retrieval.augmented|retrieval systems/i, emoji:'📚',
     simple:"RAG (Retrieval-Augmented Generation) means an AI first looks up helpful facts from your own documents, then uses those facts to write a better, more accurate answer — instead of only guessing from memory.",
     analogy:"It's like an open-book test. Instead of answering purely from memory, the AI is allowed to flip through a book first, find the right page, and then write its answer using what it found.",
-    points:[
-      "Step 1: search your documents for relevant information.",
-      "Step 2: give that information to the AI along with your question.",
-      "Step 3: the AI writes an answer using those real facts.",
-      "This helps reduce made-up or wrong answers."
-    ],
-    example:{
-      desc:"A simple RAG flow:",
-      code:`question = "What is our refund policy?"\n\nfacts = search_documents(question)\nanswer = ask_ai(question, context=facts)`
-    }
+    points:["Step 1: search your documents for relevant information.","Step 2: give that information to the AI along with your question.","Step 3: the AI writes an answer using those real facts.","This helps reduce made-up or wrong answers."],
+    example:{ desc:"A simple RAG flow:", code:`question = "What is our refund policy?"\n\nfacts = search_documents(question)\nanswer = ask_ai(question, context=facts)` }
   },
-  kg: {
-    emoji:'🕸️',
-    simple:"A Knowledge Graph is a way of storing facts as connected dots and lines — showing how people, places, and things are related to each other — so an AI can understand connections, not just single facts.",
-    analogy:"Think of a family tree, but for everything: 'Paris' connects to 'France', 'France' connects to 'Europe'. A knowledge graph is like a giant map of connected facts.",
-    points:[
-      "Facts are stored as 'this is connected to that'.",
-      "Helps AI understand relationships, not just isolated facts.",
-      "Makes it easier to answer questions that need connecting the dots.",
-      "Used in search engines, recommendations, and research tools."
-    ],
-    example:{
-      desc:"A tiny knowledge graph in plain form:",
-      code:`facts = [\n  ("Paris", "is capital of", "France"),\n  ("France", "is in", "Europe"),\n]\n\n# Question: "What continent is Paris in?"\n# The graph can connect the dots to answer: Europe`
-    }
+  { re:/vector|embedding/i, emoji:'📦',
+    simple:"Embeddings and Vector Search are how an AI turns words, sentences, or documents into lists of numbers that capture their meaning — so it can find things that mean something similar, not just things spelled the same way.",
+    analogy:"Imagine a toy box where similar toys are always placed near each other automatically — all the cars together, all the dolls together — so when you want 'something like a car,' you instantly know where to look.",
+    points:["Turns text into lists of numbers called 'vectors'.","Similar meanings end up stored close together.","Helps AI search by meaning, not just exact words.","Powers features like semantic search and RAG."],
+    example:{ desc:"Finding similar items using vector search:", code:`db.add("a happy dog playing")\ndb.add("a joyful puppy running")\ndb.add("a car engine part")\n\nresults = db.search("cheerful puppy")\n# returns the two dog-related entries first` }
   },
-  protocols: {
-    emoji:'📡',
-    simple:"Agent Communication Protocols are the shared rules that let different AI agents talk to each other clearly — like a common language — so they don't get confused when working together.",
-    analogy:"Imagine two people from different countries trying to work together without a shared language — it would be messy! A protocol is like agreeing to both speak English so the teamwork goes smoothly.",
-    points:[
-      "Sets a clear format for how agents send messages.",
-      "Helps avoid confusion between different AI agents.",
-      "Makes it possible for agents built by different teams to cooperate.",
-      "Similar to how computers use protocols to talk over the internet."
-    ],
-    example:{
-      desc:"A simple shared message format between agents:",
-      code:`message = {\n  "from": "agent_researcher",\n  "to": "agent_writer",\n  "type": "share_facts",\n  "content": "Volcanoes form at tectonic plate boundaries."\n}`
-    }
+  { re:/memory/i, emoji:'🗂️',
+    simple:"Memory (in AI agents) means letting an AI remember things from earlier — like your name, what you asked before, or facts it learned — so it doesn't forget everything after each message.",
+    analogy:"It's like giving the AI a notebook. Without a notebook, it forgets you the moment you stop talking. With one, it can flip back and remember what you told it yesterday.",
+    points:["Short-term memory: remembers the current conversation.","Long-term memory: saves important facts for later use.","Memories can be stored and searched, like a filing cabinet.","Good memory makes an agent feel more helpful and personal."],
+    example:{ desc:"A tiny memory notebook for an agent:", code:`memory = {}\n\nmemory["favorite_color"] = "blue"\n\n# Later in a new conversation...\nif "favorite_color" in memory:\n    print("I remember! Your favorite color is " + memory["favorite_color"])` }
   },
-  orchestration: {
-    emoji:'🎼',
-    simple:"Orchestration Patterns are the different ways you can organize a team of AI agents — like who goes first, who checks the work, and how tasks are handed off — so the whole team works smoothly.",
-    analogy:"Think of a conductor leading an orchestra. The conductor doesn't play an instrument, but makes sure every musician plays at the right time. Orchestration does that job for AI agents.",
-    points:[
-      "Decides the order agents work in (one after another, or all at once).",
-      "Can have a 'manager' agent that assigns tasks to others.",
-      "Helps avoid agents stepping on each other's work.",
-      "Different patterns fit different kinds of problems."
-    ],
-    example:{
-      desc:"A simple manager-style orchestration:",
-      code:`manager.assign("research", to=researcher_agent)\nmanager.assign("write", to=writer_agent, after="research")\nmanager.assign("review", to=editor_agent, after="write")`
-    }
+  { re:/langgraph/i, emoji:'🕸️',
+    simple:"LangGraph is a tool for building AI agents as a 'graph' of steps — like a flowchart with arrows — so the agent can loop, branch, and make decisions instead of just following one straight line.",
+    analogy:"Imagine a board game with different paths you can take depending on what happens. LangGraph lets developers draw that kind of map for an AI agent's thinking process.",
+    points:["Agent steps are drawn like a flowchart (a graph).","The agent can loop back and try again if needed.","It can branch into different paths depending on the situation.","Useful for agents that need multiple rounds of thinking."],
+    example:{ desc:"A simple graph-style flow:", code:`graph.add_step("research")\ngraph.add_step("write_answer")\ngraph.add_edge("research", "write_answer")\n\n# If the answer isn't good enough, loop back to research\ngraph.add_edge("write_answer", "research", condition="needs_more_info")` }
   },
-  eval: {
-    emoji:'📊',
-    simple:"Evaluation & Observability means checking how well an AI agent is actually doing its job — measuring mistakes, tracking its steps, and making sure it's working correctly, kind of like a report card plus a security camera.",
-    analogy:"It's like a teacher grading your homework AND watching how you solved each problem — so they can tell not just if you got it right, but where you went wrong if you didn't.",
-    points:[
-      "Measures how accurate or helpful the AI's answers are.",
-      "Logs each step the agent takes, so you can see what happened.",
-      "Helps catch mistakes before they cause bigger problems.",
-      "Important for trusting an AI system in the real world."
-    ],
-    example:{
-      desc:"A simple evaluation check:",
-      code:`correct_answers = 92\ntotal_questions = 100\n\naccuracy = correct_answers / total_questions * 100\nprint(f"Agent accuracy: {accuracy}%")  # 92%`
-    }
+  { re:/langchain/i, emoji:'🔗',
+    simple:"LangChain is a toolkit that helps developers connect an AI model to other things — like documents, tools, and memory — so it's easier to build a full AI application instead of starting from scratch.",
+    analogy:"Think of LEGO bricks for building AI apps. LangChain gives you ready-made bricks (pieces) for memory, tools, and data, so you can snap them together quickly.",
+    points:["Provides ready-made building blocks for AI apps.","Helps connect the AI to your own documents and data.","Makes it easier to add memory and tools to an AI.","Popular for building chatbots and AI assistants."],
+    example:{ desc:"A very simplified LangChain-style chain:", code:`chain = load_documents() | ask_question() | get_answer()\n\nanswer = chain.run("What does this PDF say about refunds?")` }
   },
-  safety: {
-    emoji:'🛡️',
-    simple:"Safety & Guardrails are the rules and checks put in place to stop an AI agent from doing something harmful, unfair, or wrong — like a fence that keeps it inside safe boundaries while it works.",
-    analogy:"Think of the bumpers in a bowling lane for kids — they let the ball roll freely but stop it from going into the gutter. Guardrails let the AI act freely but stop it from causing harm.",
-    points:[
-      "Blocks the AI from harmful or unsafe actions.",
-      "Checks outputs before they're shown to a user.",
-      "Sets limits on what tools or data the AI can access.",
-      "Keeps the AI helpful, honest, and safe to use."
-    ],
-    example:{
-      desc:"A simple guardrail check:",
-      code:`response = ai_generate(user_input)\n\nif contains_unsafe_content(response):\n    response = "Sorry, I can't help with that."`
-    }
+  { re:/tool/i, emoji:'🛠️',
+    simple:"Giving an AI 'tools' means letting it use things like a calculator, a search engine, or a weather API — so it isn't limited to just talking. It can actually go and do things, then use the result to help you.",
+    analogy:"It's like giving a smart assistant a toolbox. Instead of just guessing a math answer, it can pick up the calculator tool and get the exact right number.",
+    points:["The AI is given a list of tools it's allowed to use.","It decides which tool fits the current problem.","It calls the tool with the right information.","It uses the tool's answer to keep helping you."],
+    example:{ desc:"An AI deciding to use a calculator tool:", code:`user_question = "What is 482 * 17?"\n\n# The AI recognizes this needs the calculator tool\ntool_call = calculator(482, "*", 17)\nanswer = tool_call.result  # 8194` }
   },
-  deploy: {
-    emoji:'🚀',
-    simple:"Deployment & Scaling is the process of taking an AI agent from your computer and making it available for lots of real people to use reliably — even if thousands of people use it at the same time.",
-    analogy:"It's like the difference between cooking a meal for your family versus running a restaurant that serves hundreds of customers every night — you need a bigger kitchen, a solid process, and a way to keep things running smoothly.",
-    points:[
-      "Moves the AI agent from a test environment to the real world.",
-      "Makes sure it can handle many users at once (scaling).",
-      "Includes monitoring to catch problems quickly.",
-      "Keeps the system fast, stable, and available."
-    ],
-    example:{
-      desc:"A simple idea of scaling up:",
-      code:`# One user talking to one agent: easy!\nhandle_request(user_1)\n\n# Thousands of users at once: needs deployment + scaling\nfor user in many_users:\n    handle_request_in_parallel(user)`
-    }
+  { re:/multi agent|collaboration|deployments/i, emoji:'🤝',
+    simple:"Multi-Agent Collaboration means having more than one AI agent work together on a task — like a little team of AI helpers, each with a different job, that share information to reach a shared goal.",
+    analogy:"Imagine two classmates working on a project: one writes the answer, and the other checks it for mistakes. Multi-agent systems set up AI 'classmates' like that.",
+    points:["More than one AI agent works on the same problem.","Agents send messages to each other automatically.","One agent might research, another might write or check.","Useful for tasks that are easier to split up into roles."],
+    example:{ desc:"Two agents working together:", code:`writer_agent = Agent("Writer")\nreviewer_agent = Agent("Reviewer")\n\ndraft = writer_agent.write("a poem about robots")\nfeedback = reviewer_agent.review(draft)` }
   },
-  portal: {
-    emoji:'🖥️',
+  { re:/architecture/i, emoji:'🏗️',
+    simple:"Agent Architecture is the blueprint for how an AI 'agent' is built — how it thinks, remembers things, uses tools, and decides what to do next, step by step, to finish a task.",
+    analogy:"It's like the flowchart for a robot helper: first it listens to what you want, then it thinks about a plan, then it acts, then it checks if it worked — and repeats until the job is done.",
+    points:["An agent usually has 4 jobs: sense, think, act, and check.","It can loop through these steps multiple times.","It decides on its own which tool or step to use next.","Good architecture keeps the agent organized and less confused."],
+    example:{ desc:"A simple loop that shows how an agent thinks:", code:`while task_not_done:\n    observation = look_at_situation()\n    plan = decide_next_step(observation)\n    result = do_action(plan)\n    task_not_done = check_if_finished(result)` }
+  },
+  { re:/python/i, emoji:'🐍',
+    simple:"Python is a beginner-friendly programming language that's very popular for building AI. This resource teaches Python skills that you'll use to build and control AI agents.",
+    analogy:"If AI models are like powerful car engines, Python is the steering wheel and pedals — it's how a person actually controls and directs what the AI does.",
+    points:["Uses plain, readable commands that look a bit like English.","Widely used for AI, data, and automation.","Great first language for beginners.","Most AI tools (like LangChain) are built for Python."],
+    example:{ desc:"A tiny taste of Python:", code:`name = "Agent Smith"\nfor i in range(3):\n    print(f"Hello, I am {name}!")` }
+  },
+  { re:/api/i, emoji:'🔌',
+    simple:"An API (Application Programming Interface) is a way for one computer program to ask another program for information or to do something — like ordering food through a menu instead of walking into the kitchen yourself.",
+    analogy:"Think of a restaurant menu. You don't need to know how the kitchen cooks the food — you just order from the menu (the API) and the kitchen (the other program) sends back your meal (the data).",
+    points:["Lets two different programs talk to each other.","You send a request, and get a response back.","AI agents use APIs to check weather, search the web, and more.","APIs usually follow a clear, agreed-upon format."],
+    example:{ desc:"A simple API-style request:", code:`response = call_api("/weather", city="Delhi")\nprint(response["temperature"])  # e.g. 34°C` }
+  },
+  { re:/chatgpt|gpt-5|gpt/i, emoji:'💬',
+    simple:"ChatGPT is a well-known AI chatbot built on a large language model. This resource shows you how to use it well — asking good questions and understanding what it can and can't do.",
+    analogy:"Think of ChatGPT as a very well-read assistant who can chat, write, and explain things — but who sometimes needs clear instructions from you to give its best answer.",
+    points:["A chatbot built on a large language model (LLM).","Gets better answers when you give it clear instructions.","Useful for writing, brainstorming, coding help, and more.","Doesn't always know the most recent information."],
+    example:{ desc:"A simple back-and-forth with a chatbot:", code:`user: "Summarize this in one sentence: ..."\nassistant: "Here's a one-sentence summary: ..."` }
+  },
+  { re:/governance|risk|ethic|compliance|securing/i, emoji:'🛡️',
+    simple:"AI Governance, Risk & Ethics is about making sure AI is used safely, fairly, and responsibly — setting rules so AI helps people without accidentally causing harm, being unfair, or leaking private information.",
+    analogy:"Think of the rules and referees in a sports game. Without rules, the game could get unsafe or unfair. Governance is the set of rules that keeps AI 'playing fair'.",
+    points:["Checks that AI systems are safe before they're used widely.","Looks out for bias or unfairness in AI decisions.","Protects people's private information.","Builds trust between AI systems and the people who use them."],
+    example:{ desc:"A simple safety check idea:", code:`response = ai_generate(user_input)\n\nif contains_unsafe_content(response):\n    response = "Sorry, I can't help with that."` }
+  },
+  { re:/capstone|travel planning|copilot agent builder|agents playground|copilot studio/i, emoji:'🚀',
+    simple:"This is part of the final Capstone Project, where you bring together everything you've learned — Python, LLMs, tools, memory, and RAG — to actually design and build your own working AI agent from scratch.",
+    analogy:"It's like a school science fair project: instead of just learning facts in class, you now build something real using everything you've studied all year.",
+    points:["Combines skills from every earlier track into one project.","You design an agent with a clear goal (like planning travel).","You decide what tools and memory the agent needs.","The result is a real, working AI agent you built yourself."],
+    example:{ desc:"A tiny outline of a travel-planning agent:", code:`agent = Agent(goal="Plan a 3-day trip to Goa")\nagent.add_tool(flight_search)\nagent.add_tool(hotel_search)\n\nplan = agent.run()` }
+  },
+  { re:/workflow|automat/i, emoji:'⚙️',
+    simple:"An Agentic Workflow is a series of steps an AI agent follows automatically to get a job done — like a recipe the AI follows on its own, without a human doing each step by hand.",
+    analogy:"Think of a factory assembly line: each station does one job automatically, and the product moves down the line until it's finished. An agentic workflow is that same idea, but for AI tasks.",
+    points:["Breaks a task into a series of automatic steps.","Removes repetitive manual work for people.","Can include AI decisions at each step.","Used for things like filtering resumes or processing forms."],
+    example:{ desc:"A simple automated workflow:", code:`workflow = [read_resume, score_candidate, sort_by_score]\n\nfor step in workflow:\n    data = step(data)` }
+  },
+  { re:/website build|dashboard, syllabus/i, emoji:'🖥️',
     simple:"Building this Portal meant designing and coding a full website from scratch — a dashboard, a syllabus tracker, a submissions log, and a notes section — all working together as one smooth app.",
     analogy:"It's like building a school inside a single building: one room for the timetable (dashboard), one for the subject list (syllabus), one for homework drop-off (submissions), and one for the library (notes) — all connected by the same hallway (navigation).",
-    points:[
-      "Planned the layout: header, sidebar navigation, and content area.",
-      "Built each section as its own page inside one app.",
-      "Made the design calm, professional, and easy to read.",
-      "Made sure it works on desktop, tablet, and mobile."
-    ],
-    example:{
-      desc:"A tiny look at how the app switches between sections:",
-      code:`function showSection(name) {\n  hideAllSections();\n  document.getElementById(name).classList.add("active");\n}\n\nshowSection("dashboard");`
-    }
+    points:["Planned the layout: header, sidebar navigation, and content area.","Built each section as its own page inside one app.","Made the design calm, professional, and easy to read.","Made sure it works on desktop, tablet, and mobile."],
+    example:{ desc:"A tiny look at how the app switches between sections:", code:`function showSection(name) {\n  hideAllSections();\n  document.getElementById(name).classList.add("active");\n}\n\nshowSection("dashboard");` }
   },
-  dbintegration: {
-    emoji:'🗄️',
+  { re:/database integration/i, emoji:'🗄️',
     simple:"Database & Notes Integration means connecting the notes and code files you submit to a storage system, so nothing gets lost — everything you save stays there even after you close and reopen the website.",
     analogy:"It's like the difference between writing notes on a whiteboard (they disappear when erased) versus writing them in a notebook (they stay saved, and you can flip back to any page later). This step gave the portal its 'notebook'.",
-    points:[
-      "Every submission (file + notes) is saved to storage automatically.",
-      "Saved data is loaded back whenever you open the portal again.",
-      "Progress bars update automatically based on what's been saved.",
-      "This connects the Submissions, Notes, and Progress Tracker sections together."
-    ],
-    example:{
-      desc:"A simplified look at saving and loading data:",
-      code:`// Save a submission\nstorage.save("submission_1", { topic: "ML", notes: "Learned basics" });\n\n// Load it back later\nconst saved = storage.load("submission_1");\nconsole.log(saved.notes); // "Learned basics"`
-    }
+    points:["Every submission (file + notes) is saved to storage automatically.","Saved data is loaded back whenever you open the portal again.","Progress bars update automatically based on what's been saved.","This connects the Submissions, Notes, and Progress Tracker sections together."],
+    example:{ desc:"A simplified look at saving and loading data:", code:`// Save a submission\nstorage.save("submission_1", { topic: "ML", notes: "Learned basics" });\n\n// Load it back later\nconst saved = storage.load("submission_1");\nconsole.log(saved.notes); // "Learned basics"` }
   },
-};
+  { re:/agent/i, emoji:'🤖',
+    simple:"An AI Agent is a program that doesn't just answer one question — it can plan, use tools, remember things, and take a series of actions on its own to reach a goal you give it.",
+    analogy:"A regular chatbot is like a friend who only answers what you ask. An agent is more like a personal assistant who you give a goal to — like 'book me a trip' — and it goes off and figures out the steps itself.",
+    points:["Given a goal, not just a single question.","Can use tools, remember context, and make decisions.","Often loops: think, act, check, repeat.","This is the core idea behind 'Agentic AI'."],
+    example:{ desc:"A simple agent loop:", code:`while not goal_reached:\n    plan = agent.think(goal, memory)\n    result = agent.act(plan)\n    memory.append(result)` }
+  },
+];
+
+function genericByType(leafNode, trackName){
+  const templates = {
+    'Video':`This is a short video lesson called "${leafNode.name}". Watching it walks you through the idea in a simple, visual way — like a mini tutorial.`,
+    'Interactive Course':`This is a hands-on course called "${leafNode.name}". You'll read short lessons and try small exercises to practice the idea step by step.`,
+    'Course':`This is a full course called "${leafNode.name}". It teaches the topic from the ground up with lessons you can go through at your own pace.`,
+    'Cheatsheet':`This is a quick one-page cheatsheet for "${leafNode.name}" — a handy summary you can glance at to remind yourself of the key points.`,
+    'Lab':`This is a hands-on lab called "${leafNode.name}". Instead of just reading, you actually build or practice something real here.`,
+    'Skill Benchmark':`This is a short quiz-style test called "${leafNode.name}" that checks how much you already know about this topic.`,
+    'Link':`This is an external reference called "${leafNode.name}" that explains the topic in more detail on another page.`,
+    'AI Simulator':`This is an interactive simulation called "${leafNode.name}" where you practice making decisions in a safe, pretend AI scenario.`,
+    'Project':`This is a real, hands-on project called "${leafNode.name}" where you put what you've learned together and actually build something.`,
+  };
+  return {
+    emoji:'📘',
+    simple: templates[leafNode.type] || `"${leafNode.name}" is a learning resource in the "${trackName}" module.`,
+    analogy:null,
+    points:null,
+    example:null,
+  };
+}
+
+function getLeafContent(leafNode, trackName){
+  for(const rule of contentRules){
+    if(rule.re.test(leafNode.name)) return rule;
+  }
+  return genericByType(leafNode, trackName);
+}
 
 function getParentContent(topic){
   const leaves = [];
   (function walk(n){ n.children ? n.children.forEach(walk) : leaves.push(n); })(topic);
   return {
     emoji:'📁',
-    simple:`"${topic.name}" is a group of related topics in the syllabus. Open any of the ${leaves.length} topic${leaves.length===1?'':'s'} inside to see a simple explanation and an example.`,
+    simple:`"${topic.name}" is a track in the syllabus with ${leaves.length} resource${leaves.length===1?'':'s'} inside. Open any of them to see a simple explanation and an example.`,
     analogy:null,
     points:null,
     childLeaves: leaves,
   };
 }
 
+/* ============================================================
+   SUBMISSIONS SEED — Mon/Tue/Wed portfolio log entries
+   ============================================================ */
 function seedSubmissions(){
   return [
     {
       id:'sub_seed_mon',
       date:'2026-07-13',
       time:'06:45 PM',
-      topicId:'portal',
-      topicName:'Personal Projects',
+      topicId:'portfolio-i1',
+      topicName:'Portfolio Log — Building This Portal',
       fileName:'index.html',
-      notes:'Built the full Agentic AI Research & Learning Portal — dashboard, syllabus tree, submissions tracker, research notes view, and progress tracker. Set up the sidebar navigation, header, and responsive layout.',
+      notes:'Built the full Agentic AI Research & Learning Portal — dashboard, syllabus, submissions tracker, research notes view, and progress tracker. Set up the sidebar navigation, header, and responsive layout.',
       projectDone:true,
-      fullyComplete:false,
+      fullyComplete:true,
     },
     {
       id:'sub_seed_tue',
       date:'2026-07-14',
       time:'11:20 AM',
-      topicId:'dbintegration',
-      topicName:'Personal Projects',
+      topicId:'portfolio-i2',
+      topicName:'Portfolio Log — Building This Portal',
+      fileName:'style.css',
+      notes:'Built the Progress Tracker and Research Notes views, and redesigned the Syllabus page into a clean, Coursera-style expandable accordion with all 15 official tracks.',
+      projectDone:true,
+      fullyComplete:true,
+    },
+    {
+      id:'sub_seed_wed',
+      date:'2026-07-15',
+      time:'04:10 PM',
+      topicId:'portfolio-i3',
+      topicName:'Portfolio Log — Building This Portal',
       fileName:'script.js',
       notes:'Connected the Research Notes and Code Submission sections to persistent storage so every note and uploaded code file is saved and can be retrieved later. Linked submissions directly to the Progress Tracker so topic progress updates automatically.',
       projectDone:true,
@@ -653,107 +657,117 @@ function iconFlame(){ return `<svg viewBox="0 0 24 24" fill="none"><path d="M12 
 function iconStar(){ return `<svg viewBox="0 0 24 24" fill="none"><path d="M12 3.5l2.6 5.4 5.9.7-4.3 4.1 1.1 5.9L12 16.7l-5.3 2.9 1.1-5.9-4.3-4.1 5.9-.7L12 3.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>`; }
 
 /* ============================================================
-   RENDER: SYLLABUS TREE + TABLE
+   RENDER: SYLLABUS ACCORDION (Coursera-style)
    ============================================================ */
 let activeFilter = 'all';
 let searchTerm = '';
+let expandedTracks = new Set(['t1']); // Track 1 open by default, like Coursera
+
+function typeIcon(type){
+  const map = {
+    'Video':'▶','Course':'📘','Interactive Course':'💻','Cheatsheet':'📄','Lab':'🧪',
+    'Skill Benchmark':'🎯','Link':'🔗','AI Simulator':'🕹','Project':'🚀',
+  };
+  return map[type] || '•';
+}
+
+function trackProgressPct(track){
+  const kids = track.children;
+  return kids.length ? Math.round(kids.reduce((a,l)=>a+l.progress,0)/kids.length) : 0;
+}
 
 function renderSyllabus(){
-  renderTree();
-  renderSyllabusTable();
+  renderAccordion();
 }
 
-function renderTree(){
-  const root = document.getElementById('treeRoot');
-  root.innerHTML = '';
-  state.syllabus.forEach(topic=>{
-    root.appendChild(buildTreeNode(topic, true));
-  });
-}
+function renderAccordion(){
+  const container = document.getElementById('accordionList');
+  const term = searchTerm.trim().toLowerCase();
+  const filtering = !!term || activeFilter !== 'all';
 
-function buildTreeNode(node, isParent){
-  const wrap = document.createElement('div');
-  wrap.className = 'tree-node' + (isParent ? ' parent' : '');
-  const status = node.leaf ? statusFromProgress(node.progress) : parentStatus(node);
-  wrap.dataset.status = status;
+  let totalItems = 0, totalDone = 0;
+  const html = [];
 
-  const row = document.createElement('div');
-  row.className = 'tree-row';
+  state.syllabus.forEach((track, idx)=>{
+    totalItems += track.children.length;
+    totalDone += track.children.filter(l=>l.progress>=100).length;
 
-  const hasChildren = !!node.children;
-  row.innerHTML = `
-    ${hasChildren ? `<svg class="tree-caret" viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>` : `<span class="tree-caret"></span>`}
-    <span class="tree-dot"></span>
-    <span class="tree-label">${node.name}</span>
-    <span class="tree-pct">${hasChildren ? parentProgress(node)+'%' : node.progress+'%'}</span>
-  `;
-  wrap.appendChild(row);
+    const matchingRows = track.children.filter(l=>{
+      const status = statusFromProgress(l.progress);
+      const matchFilter = activeFilter === 'all' || status === activeFilter || l.difficulty === activeFilter;
+      const matchSearch = !term || l.name.toLowerCase().includes(term) || track.name.toLowerCase().includes(term);
+      return matchFilter && matchSearch;
+    });
 
-  if(hasChildren){
-    const childWrap = document.createElement('div');
-    childWrap.className = 'tree-children';
-    node.children.forEach(c=> childWrap.appendChild(buildTreeNode(c, !!c.children)));
-    wrap.appendChild(childWrap);
+    if(filtering && matchingRows.length === 0) return; // hide empty tracks while filtering
 
-    const caret = row.querySelector('.tree-caret');
-    caret.addEventListener('click', (e)=>{ e.stopPropagation(); wrap.classList.toggle('open'); });
-    row.addEventListener('click', ()=> openTopicDetail(node.id));
-  } else {
-    row.addEventListener('click', ()=> openTopicDetail(node.id));
-  }
-  return wrap;
-}
+    const rowsToShow = filtering ? matchingRows : track.children;
+    const isOpen = filtering ? true : expandedTracks.has(track.id);
+    const pct = trackProgressPct(track);
 
-function parentProgress(topic){
-  const leaves = [];
-  (function walk(n){ n.children ? n.children.forEach(walk) : leaves.push(n); })(topic);
-  return leaves.length ? Math.round(leaves.reduce((a,l)=>a+l.progress,0)/leaves.length) : 0;
-}
-function parentStatus(topic){
-  const p = parentProgress(topic);
-  return statusFromProgress(p);
-}
-
-function renderSyllabusTable(){
-  const leaves = allLeaves();
-  const filtered = leaves.filter(l=>{
-    const status = statusFromProgress(l.progress);
-    let matchFilter = true;
-    if(activeFilter !== 'all'){
-      matchFilter = (status === activeFilter) || (l.difficulty === activeFilter);
-    }
-    const term = searchTerm.trim().toLowerCase();
-    const matchSearch = !term || l.name.toLowerCase().includes(term) || l.topicName.toLowerCase().includes(term);
-    return matchFilter && matchSearch;
-  });
-
-  const tbody = document.getElementById('syllabusTableBody');
-  if(filtered.length === 0){
-    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:var(--text-faint); padding:26px;">No matching topics.</td></tr>`;
-    return;
-  }
-  tbody.innerHTML = filtered.map(l=>{
-    const status = statusFromProgress(l.progress);
-    return `
-    <tr>
-      <td>${l.topicName}</td>
-      <td><span class="topic-link" data-topic-id="${l.id}">${l.name}</span></td>
-      <td><span class="tag tag-${l.difficulty}">${l.difficulty}</span></td>
-      <td><span class="tag tag-${statusClass(status)}">${status}</span></td>
-      <td>
-        <div class="row-progress">
-          <div class="track"><div class="fill" style="width:${l.progress}%"></div></div>
-          <span class="pct">${l.progress}%</span>
+    html.push(`
+      <div class="accordion-item${isOpen ? ' open' : ''}${track.portfolio ? ' portfolio' : ''}" data-track-id="${track.id}">
+        <div class="accordion-header" data-track-id="${track.id}">
+          <div class="accordion-badge">${track.portfolio ? 'P' : idx+1}</div>
+          <div class="accordion-title-wrap">
+            <div class="accordion-title">${track.name}</div>
+            <div class="accordion-meta">${track.children.length} resource${track.children.length===1?'':'s'} · ${pct}% complete</div>
+          </div>
+          <div class="accordion-progress-mini">
+            <div class="mini-bar"><div class="mini-bar-fill" style="width:${pct}%"></div></div>
+            <span class="mini-pct mono">${pct}%</span>
+          </div>
+          <svg class="accordion-caret" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-      </td>
-      <td>${fmtDate(l.completionDate)}</td>
-      <td class="remarks-cell">${l.remarks || '—'}</td>
-    </tr>`;
-  }).join('');
-
-  tbody.querySelectorAll('.topic-link').forEach(el=>{
-    el.addEventListener('click', ()=> openTopicDetail(el.dataset.topicId));
+        <div class="accordion-body">
+          ${rowsToShow.map(l=>renderAccordionRow(l)).join('')}
+        </div>
+      </div>
+    `);
   });
+
+  container.innerHTML = html.length ? html.join('') : `<div class="accordion-empty">No matching resources.</div>`;
+
+  container.querySelectorAll('.accordion-header').forEach(h=>{
+    h.addEventListener('click', ()=>{
+      const id = h.dataset.trackId;
+      const item = h.closest('.accordion-item');
+      if(expandedTracks.has(id)){ expandedTracks.delete(id); } else { expandedTracks.add(id); }
+      item.classList.toggle('open');
+    });
+  });
+  container.querySelectorAll('.accordion-row').forEach(r=>{
+    r.addEventListener('click', (e)=>{ e.stopPropagation(); openTopicDetail(r.dataset.topicId); });
+  });
+
+  const statsEl = document.getElementById('syllabusStats');
+  if(statsEl){
+    const pct = totalItems ? Math.round(totalDone/totalItems*100) : 0;
+    statsEl.textContent = `${state.syllabus.length} tracks · ${totalItems} resources · ${totalDone} completed (${pct}%)`;
+  }
+
+  const toggleBtn = document.getElementById('toggleAllBtn');
+  if(toggleBtn){
+    const allOpen = state.syllabus.every(t=>expandedTracks.has(t.id));
+    toggleBtn.textContent = allOpen ? 'Collapse all' : 'Expand all';
+  }
+}
+
+function renderAccordionRow(l){
+  const status = statusFromProgress(l.progress);
+  return `
+    <div class="accordion-row" data-topic-id="${l.id}">
+      <span class="row-icon">${typeIcon(l.type)}</span>
+      <span class="row-title">${l.name}</span>
+      <span class="row-type mono">${l.type}</span>
+      <span class="tag tag-${l.difficulty}">${l.difficulty}</span>
+      <div class="row-progress-cell">
+        <div class="track"><div class="fill" style="width:${l.progress}%"></div></div>
+        <span class="pct">${l.progress}%</span>
+      </div>
+      <span class="tag tag-${statusClass(status)}">${status}</span>
+    </div>
+  `;
 }
 
 document.getElementById('syllabusFilters').addEventListener('click', (e)=>{
@@ -762,8 +776,15 @@ document.getElementById('syllabusFilters').addEventListener('click', (e)=>{
   document.querySelectorAll('#syllabusFilters .chip').forEach(c=>c.classList.remove('active'));
   chip.classList.add('active');
   activeFilter = chip.dataset.filter;
-  renderSyllabusTable();
+  renderAccordion();
 });
+
+document.getElementById('toggleAllBtn').addEventListener('click', ()=>{
+  const allOpen = state.syllabus.every(t=>expandedTracks.has(t.id));
+  if(allOpen){ expandedTracks.clear(); } else { state.syllabus.forEach(t=>expandedTracks.add(t.id)); }
+  renderAccordion();
+});
+
 
 /* ============================================================
    RENDER: SUBMISSIONS
@@ -865,7 +886,7 @@ function renderAll(){
    ============================================================ */
 document.getElementById('globalSearch').addEventListener('input', (e)=>{
   searchTerm = e.target.value;
-  renderSyllabusTable();
+  renderAccordion();
   renderSubmissions();
   renderNotes();
 });
@@ -929,7 +950,7 @@ submissionForm.addEventListener('submit', (e)=>{
 
   state.submissions.push({
     id: 'sub_'+Date.now(),
-    date: document.getElementById('formDate').value,
+    date: todayStr(),
     time: nowTimeStr(),
     topicId,
     topicName,
@@ -961,9 +982,7 @@ function openTopicDetail(nodeId){
   const body = document.getElementById('detailBody');
 
   if(isLeaf){
-    const c = topicContent[node.id] || {
-      emoji:'📘', simple:`"${node.name}" — content for this topic is coming soon.`, analogy:null, points:null, example:null
-    };
+    const c = getLeafContent(node, breadcrumb);
     const status = statusFromProgress(node.progress);
     body.innerHTML = `
       <div class="detail-tags">
