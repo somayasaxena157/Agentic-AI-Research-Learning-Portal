@@ -816,6 +816,7 @@ function renderSubmissions(){
       <td>${s.fileName ? `<span class="file-chip">📄 ${s.fileName}</span>` : '<span class="muted">—</span>'}</td>
       <td class="notes-cell collapsed" title="Click to expand">${s.notes || '—'}</td>
       <td><span class="tag tag-${statusClass(status)}">${status}</span></td>
+      <td><button class="delete-btn" data-sub-id="${s.id}" title="Delete submission">🗑</button></td>
     </tr>`;
   }).join('');
 
@@ -823,6 +824,18 @@ function renderSubmissions(){
   tbody.querySelectorAll('.notes-cell').forEach(cell=>{
     cell.addEventListener('click', ()=> cell.classList.toggle('collapsed'));
   });
+
+ // delete submission
+  tbody.querySelectorAll('.delete-btn').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      if(!confirm('Delete this submission? This cannot be undone.')) return;
+      state.submissions = state.submissions.filter(s=>s.id !== btn.dataset.subId);
+      saveState();
+      renderAll();
+    });
+  });
+}
 }
 
 /* ============================================================
@@ -906,6 +919,7 @@ function populateTopicSelect(){
 function openModal(){
   modalBackdrop.classList.add('show');
   populateTopicSelect();
+  document.getElementById('formDate').value = todayStr();
 }
 function closeModal(){
   modalBackdrop.classList.remove('show');
@@ -926,6 +940,7 @@ document.getElementById('formFile').addEventListener('change', (e)=>{
 submissionForm.addEventListener('submit', (e)=>{
   e.preventDefault();
   const topicId = document.getElementById('formTopic').value;
+  const subDate = document.getElementById('formDate').value || todayStr();
   const fileInput = document.getElementById('formFile');
   const fileName = fileInput.files[0] ? fileInput.files[0].name : '';
   const notes = document.getElementById('formNotes').value.trim();
@@ -942,7 +957,8 @@ submissionForm.addEventListener('submit', (e)=>{
   if(projectDone && p < 75) p = 75;
   if(fullyComplete) p = 100;
   leafNode.progress = p;
-  if(p >= 100 && !leafNode.completionDate) leafNode.completionDate = todayStr();
+  
+  if(p >= 100 && !leafNode.completionDate) leafNode.completionDate = subDate;
   if(p < 100) leafNode.completionDate = leafNode.completionDate; // keep as-is unless completed
   if(notes) leafNode.remarks = notes.length > 80 ? notes.slice(0,77)+'…' : notes;
 
@@ -950,7 +966,7 @@ submissionForm.addEventListener('submit', (e)=>{
 
   state.submissions.push({
     id: 'sub_'+Date.now(),
-    date: todayStr(),
+    date: subDate,
     time: nowTimeStr(),
     topicId,
     topicName,
