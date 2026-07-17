@@ -285,7 +285,7 @@
 
 <script src="script.js"></script>
 
-<!-- Firebase Initialization -->
+<!-- 1. Initialize Firebase FIRST -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
   import { getFirestore } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
@@ -302,8 +302,10 @@
 
   const app = initializeApp(firebaseConfig);
   window.db = getFirestore(app);
-  console.log("Firebase connection established.");
 </script>
+
+<!-- 2. Load your script SECOND (with type="module") -->
+<script type="module" src="script.js"></script>
 
 </body>
 </html>
