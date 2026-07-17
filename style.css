@@ -286,7 +286,7 @@ input, select, textarea{font-family: 'Inter', sans-serif;}
   color:var(--text-faint); border-bottom:1px solid var(--border-strong); font-family: 'Inter', sans-serif; font-weight:600;
   white-space:nowrap;
 }
-.data-table tbody td{padding:12px; border-bottom:1px solid var(--border); vertical-align:middle; color:var(--text);}
+.data-table tbody td{padding:12px; border-bottom:1px solid var(--border); vertical-align:top; color:var(--text);}
 .data-table tbody tr{transition:background .15s var(--ease);}
 .data-table tbody tr:hover{background:var(--bg-secondary);}
 
