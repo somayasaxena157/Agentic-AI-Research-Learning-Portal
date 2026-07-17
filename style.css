@@ -5,20 +5,20 @@
 
 :root{
   --bg-primary:#FFFFFF;
-  --bg-secondary:#F7F9F4;
-  --bg-tertiary:#F1F4EB;
-  --accent:#6B8E23;
-  --accent-dark:#556B2F;
-  --accent-soft:#EAF0DD;
-  --border:#E4E7DC;
-  --border-strong:#D7DCC9;
-  --text:#2B2B26;
-  --text-muted:#71716A;
-  --text-faint:#9A9A91;
-  --danger:#B3543E;
-  --shadow-sm:0 1px 2px rgba(43,43,38,0.05), 0 1px 1px rgba(43,43,38,0.03);
-  --shadow-md:0 4px 16px rgba(43,43,38,0.07), 0 1px 3px rgba(43,43,38,0.04);
-  --shadow-lg:0 12px 32px rgba(43,43,38,0.12), 0 2px 8px rgba(43,43,38,0.06);
+  --bg-secondary:#F4F6F9;
+  --bg-tertiary:#E9ECF1;
+  --accent:#0066FF; /* HCL Bright Blue */
+  --accent-dark:#5B20E2; /* HCL Deep Purple */
+  --accent-soft:#EBF0FA;
+  --border:#E1E5EA;
+  --border-strong:#C9CFD6;
+  --text:#1A1D20;
+  --text-muted:#6B7280;
+  --text-faint:#9CA3AF;
+  --danger:#DC2626;
+  --shadow-sm:0 1px 2px rgba(26,29,32,0.05), 0 1px 1px rgba(26,29,32,0.03);
+  --shadow-md:0 4px 16px rgba(26,29,32,0.07), 0 1px 3px rgba(26,29,32,0.04);
+  --shadow-lg:0 12px 32px rgba(26,29,32,0.12), 0 2px 8px rgba(26,29,32,0.06);
   --radius-sm:8px;
   --radius-md:14px;
   --radius-lg:20px;
@@ -291,12 +291,12 @@ input, select, textarea{font-family:Arial, Helvetica, sans-serif;}
 .data-table tbody tr:hover{background:var(--bg-secondary);}
 
 .tag{display:inline-block; padding:3px 10px; border-radius:999px; font-size:10.5px; font-weight:600; letter-spacing:.02em;}
-.tag-Beginner{background:#EAF0DD; color:var(--accent-dark);}
-.tag-Intermediate{background:#F3ECD0; color:#8A6D1D;}
-.tag-Advanced{background:#F2E1DC; color:var(--danger);}
+.tag-Beginner{background:#EBF0FA; color:var(--accent-dark);}
+.tag-Intermediate{background:#FEF3C7; color:#92400E;}
+.tag-Advanced{background:#FEE2E2; color:var(--danger);}
 .tag-Completed{background:var(--accent-soft); color:var(--accent-dark);}
 .tag-Pending{background:var(--bg-tertiary); color:var(--text-faint);}
-.tag-InProgress{background:#F3ECD0; color:#8A6D1D;}
+.tag-InProgress{background:#FEF3C7; color:#92400E;}
 
 .row-progress{display:flex; align-items:center; gap:8px; min-width:110px;}
 .row-progress .track{flex:1; height:6px; background:var(--bg-tertiary); border-radius:4px; overflow:hidden;}
