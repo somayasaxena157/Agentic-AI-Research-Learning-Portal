@@ -284,5 +284,26 @@
 </div>
 
 <script src="script.js"></script>
+
+<!-- Firebase Initialization -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyB16z9zqhZ3l3ybt6DYsHMoUMOm5z4Vf8I",
+    authDomain: "agentic-ai-portal.firebaseapp.com",
+    projectId: "agentic-ai-portal",
+    storageBucket: "agentic-ai-portal.appspot.com",
+    messagingSenderId: "586100178207",
+    appId: "1:586100178207:web:e66f006286012053cf442a",
+    measurementId: "G-PJMBCVRQX2"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  window.db = getFirestore(app);
+  console.log("Firebase connection established.");
+</script>
+
 </body>
 </html>
